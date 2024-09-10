@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Job Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements a job scheduler system with delayed execution for retrieving random Unsplash images from the food category. The job execution time ranges from 5 seconds to 5 minutes, with 5-second steps. The system consists of two parts:
 
-## Available Scripts
+Backend (Node): Handles job creation, job status management, and WebSocket-based notifications.
+Frontend (React + Tailwind): Displays the job list, allows users to create new jobs, and shows job results when resolved.
 
-In the project directory, you can run:
+# Features
 
-### `npm start`
+## Backend:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    Create new jobs via POST API.
+    Retrieve job status and results via GET API.
+    WebSocket notifications when a job is resolved.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Frontend:
 
-### `npm test`
+    View all jobs with status and image result.
+    Create a new job.
+    Real-time update for job status using WebSocket.
+    View job details by clicking on a job item.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Prerequisites
 
-### `npm run build`
+    Make sure you have the following installed on your machine:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Node.js (v14.x or later)
+    npm
+    Git
+    Unsplash API Key (for backend image retrieval)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Instructions for Running the Server (Backend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    1. Navigate to the Server Directory
+        cd server
+    2. Install Dependencies
+        npm install
+    3. Start the Backend Server
+        node server.js
 
-### `npm run eject`
+    The server will run on http://localhost:5000.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## API Endpoints:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    POST /jobs: Creates a new job and returns the job ID.
+    GET /jobs: Fetches a list of all jobs with their status and result (if resolved).
+    GET /jobs/{jobId}: Fetches the details of a specific job by its ID.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## WebSocket URL:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ws://localhost:5000 (used for real-time notifications of job updates)
 
-## Learn More
+# Instructions for Running the Frontend (React)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    1. Navigate to the Frontend Directory
+        cd frontend
+        cd job-app
+    2. Install Dependencies
+        npm install
+    3. Start the Frontend Development Server
+        npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    The frontend will be accessible at http://localhost:3000.
 
-### Code Splitting
+# How to Use the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 1. Creating a Job:
 
-### Analyzing the Bundle Size
+    Navigate to http://localhost:3000.
+    On the main page, click the Create Job button to create a new job.
+    A new job will be added to the list with the status pending.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 2. Viewing Job Status:
 
-### Making a Progressive Web App
+    All created jobs will be listed under the Job Task section.
+    Each job card will display the job image (when resolved), job ID, and the status (pending or resolved).
+    Jobs will automatically update to resolved once they retrieve the image from Unsplash.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 3. Job Details:
 
-### Advanced Configuration
+    Click on any job card to view the detailed page for that specific job, which will include the job's image, ID, and status.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# WebSocket Real-Time Updates
 
-### Deployment
+    The frontend uses WebSocket to receive real-time updates about job statuses. Once a job's status changes to resolved, the corresponding job card will update automatically without requiring a page refresh.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# Total Time Spent
 
-### `npm run build` fails to minify
+## Time Spent On Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    Initial setup and project structure: 1 hour
+    Implementing job service logic: 1.5 hours
+    WebSocket implementation for real-time updates: 1.5 hour
+    Swagger documentation setup: 1.5 hour
+    Testing and debugging: 30 mints
+
+## Time Spent On Frontend
+
+    Initial setup and project structure: 30 mints
+    Make Pages: 2 hour
+    API's Integration: 1 hour
+    Testing and debugging: 30 mints
